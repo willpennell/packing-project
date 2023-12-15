@@ -5,13 +5,13 @@ import (
 	"log"
 	"testing"
 
-	"github.com/willpennell/packing-project/services"
+	"github.com/willpennell/packing-project/service"
 
 	"github.com/stretchr/testify/assert"
 )
 
 func TestPackItems(t *testing.T) {
-	packer := services.PackService{}
+	packer := service.PackService{}
 
 	packSizes := []int{10, 5, 2}
 	items := 15
@@ -33,7 +33,7 @@ func TestPackItems(t *testing.T) {
 }
 
 func TestEmptyList(t *testing.T) {
-	packer := services.PackService{}
+	packer := service.PackService{}
 
 	packSizes := []int{}
 	items := 10
@@ -44,7 +44,7 @@ func TestEmptyList(t *testing.T) {
 }
 
 func TestDuplicatePackSizes(t *testing.T) {
-	packer := services.PackService{}
+	packer := service.PackService{}
 
 	packSizes := []int{10, 10, 5}
 	items := 10
@@ -69,7 +69,7 @@ func TestDuplicatePackSizes(t *testing.T) {
 }
 
 func TestRequirementInput(t *testing.T) {
-	packer := services.PackService{}
+	packer := service.PackService{}
 	packSizes := []int{5000, 2000, 1000, 500, 250}
 	testScenarios := []struct {
 		packSizes          []int
@@ -100,7 +100,7 @@ func TestRequirementInput(t *testing.T) {
 }
 
 func TestZeroItems(t *testing.T) {
-	packer := services.PackService{}
+	packer := service.PackService{}
 	packSizes := []int{5000, 2000, 1000, 500, 250}
 	items := 0
 
