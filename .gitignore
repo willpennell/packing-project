@@ -1,0 +1,54 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Test binary, built with "go test -c"
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+# Project-local glide cache, RE: https://github.com/Masterminds/glide/issues/736
+.glide/
+
+# The directory `.cache` that may be created by the tests
+.cache
+
+# IDE and editor folders
+.vscode/
+.idea/
+*.swp
+*~
+
+# Go build output
+bin/
+pkg/
+
+# Go Module cache
+$GOPATH/pkg/mod/
+$GOPATH/pkg/sumdb/
+
+# Go Modules specific files to exclude
+go.sum
+
+# Log files
+*.log
+
+# Miscellaneous files
+.DS_Store
+.env
+.env.local
+
+tmp/
+config.yaml
+
+.mp3
+.wav
