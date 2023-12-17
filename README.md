@@ -48,7 +48,6 @@ GET https://packing-project.onrender.com/pack/250
 
 POST https://packing-project.onrender.com/pack/add?size=15
 - Description: Adds a new pack size to the system.
-- Request Body: JSON structure containing the details of the pack size to be added (e.g., size of the pack).
 - Response: Status 200 OK
 - Usage: POST /pack/add with a JSON body specifying the new pack size details.
 
@@ -56,7 +55,6 @@ POST https://packing-project.onrender.com/pack/add?size=15
 
 DELETE https://packing-project.onrender.com/pack/delete?size=15
 - Description: Removes an existing pack size from the system.
-- Request Body: JSON structure specifying the pack size to be deleted.
 - Response: Status 200 OK
 - Usage: DELETE /pack/delete with a JSON body specifying the pack size to remove.
 
@@ -64,7 +62,7 @@ DELETE https://packing-project.onrender.com/pack/delete?size=15
 
 GET https://packing-project.onrender.com/pack/list
 - Description: Lists all available pack sizes in the system.
-- Response: JSON array of all pack sizes, each with its detailed information.
+- Response: JSON array of all pack sizes.
 ```JSON
     {
         "pack_sizes": [
@@ -92,7 +90,7 @@ POST https://packing-project.onrender.com/pack/new
         ]
     }
 ```
-- Response: Confirmation message indicating successful creation of the new list of pack sizes.
+- Response: Status 200 OK
 - Usage: POST /pack/new with a JSON body specifying a new list of pack sizes.
 
 ---
@@ -103,5 +101,5 @@ GET https://packing-project.onrender.com/pack/reset
 - Usage: GET /pack/reset to reset pack sizes to their default settings.
 
 ---
-# Postman Collection
+## Postman Collection
 in /postman there is a postman collection with the endpoints and sample data ready to go!
