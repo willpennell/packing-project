@@ -37,7 +37,7 @@ $GOPATH/pkg/mod/
 $GOPATH/pkg/sumdb/
 
 # Go Modules specific files to exclude
-go.sum
+
 
 # Log files
 *.log
