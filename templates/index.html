@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTMX Example</title>
+    <script src="https://unpkg.com/htmx.org"></script>
+</head>
+<body>
+
+    <form id="pack-form">
+        <input type="number" name="pack-size" id="pack-size-input" placeholder="Enter pack size" required>
+        <button type="submit">Load Pack Data</button>
+    </form>
+
+    <div id="result">
+    </div>
+
+    <script>
+    function formatDataAsHtml(data) {
+        let html = '<div>';
+        for (const [box, details] of Object.entries(data.Packs)) {
+            html += `<div><h3>${box}</h3><p>Size: ${details.size}</p><p>Used: ${details.used}</p></div>`;
+        }
+        html += '</div>';
+        return html;
+    }
+
+    document.getElementById('pack-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var packSize = document.getElementById('pack-size-input').value;
+        var url = '/pack/' + packSize;
+        htmx.ajax('GET', url, '#result');
+    });
+
+    document.body.addEventListener('htmx:afterOnLoad', function(event) {
+        console.log('HTMX afterOnLoad triggered', event);
+        if (event.detail.elt.id === 'result') {
+            try {
+                let data = JSON.parse(event.detail.xhr.responseText);
+                console.log('Parsed Data:', data);
+                let formattedHtml = formatDataAsHtml(data);
+                event.detail.elt.innerHTML = formattedHtml;
+            } catch (error) {
+                console.error('Error parsing JSON:', error);
+            }
+        } else {
+            console.log("Event triggered by a different element");
+        }
+    });
+</script>
+
+
+</body>
+</html>
