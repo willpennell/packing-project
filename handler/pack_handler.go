@@ -26,12 +26,13 @@ func GetPackHandler(dbService *service.DBService) gin.HandlerFunc {
 		}
 
 		packer := service.PackService{}
-		extraItems, totalItems, totalPacks, counts, err := packer.PackItems(packSizes, number)
+		response, err := packer.PackItems(packSizes, number)
+
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err})
 		}
 
-		c.JSON(http.StatusOK, gin.H{"extraItems": extraItems, "totalItems": totalItems, "totalPacks": totalPacks, "counts": counts})
+		c.JSON(http.StatusOK, response)
 	}
 }
 

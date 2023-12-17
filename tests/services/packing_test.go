@@ -19,17 +19,17 @@ func TestPackItems(t *testing.T) {
 	expectedExtraItems := 0
 	expectedTotalItems := 15
 	expectedTotalPacks := 2
-	expectedPackCounts := []int{1, 1, 0}
+	//expectedPacks := model.PackInfo{}
 
-	extraItems, actualTotalItems, actualTotalPack, actualCounts, err := packer.PackItems(packSizes, items)
+	res, err := packer.PackItems(packSizes, items)
 	if err != nil {
 		log.Fatalf(err.Error())
 	}
 
-	assert.Equal(t, expectedExtraItems, extraItems)
-	assert.Equal(t, expectedPackCounts, actualCounts)
-	assert.Equal(t, expectedTotalItems, actualTotalItems)
-	assert.Equal(t, expectedTotalPacks, actualTotalPack)
+	assert.Equal(t, expectedExtraItems, res.ExtraItems)
+	assert.NotNil(t, res.Packs)
+	assert.Equal(t, expectedTotalItems, res.TotalItems)
+	assert.Equal(t, expectedTotalPacks, res.TotalPacks)
 }
 
 func TestEmptyList(t *testing.T) {
@@ -39,7 +39,7 @@ func TestEmptyList(t *testing.T) {
 	items := 10
 
 	fmt.Print(len(packSizes))
-	_, _, _, _, err := packer.PackItems(packSizes, items)
+	_, err := packer.PackItems(packSizes, items)
 	assert.Error(t, err)
 }
 
@@ -56,15 +56,15 @@ func TestDuplicatePackSizes(t *testing.T) {
 
 	packer.PackItems(packSizes, items)
 
-	extraItems, actualTotalItems, actualTotalPack, actualCounts, err := packer.PackItems(packSizes, items)
+	res, err := packer.PackItems(packSizes, items)
 	if err != nil {
 		log.Fatalf(err.Error())
 	}
 
-	assert.Equal(t, expectedExtraItems, extraItems)
-	assert.Equal(t, expectedPackCounts, actualCounts)
-	assert.Equal(t, expectedTotalItems, actualTotalItems)
-	assert.Equal(t, expectedTotalPacks, actualTotalPack)
+	assert.Equal(t, expectedExtraItems, res.ExtraItems)
+	assert.NotNil(t, expectedPackCounts, res.Packs)
+	assert.Equal(t, expectedTotalItems, res.TotalItems)
+	assert.Equal(t, expectedTotalPacks, res.TotalPacks)
 
 }
 
@@ -87,15 +87,15 @@ func TestRequirementInput(t *testing.T) {
 	}
 
 	for _, tt := range testScenarios {
-		extraItems, actualTotalItems, actualTotalPack, actualCounts, err := packer.PackItems(tt.packSizes, tt.items)
+		res, err := packer.PackItems(tt.packSizes, tt.items)
 		if err != nil {
 			t.Fatalf(err.Error())
 		}
 
-		assert.Equal(t, tt.expectedExtraItems, extraItems)
-		assert.Equal(t, tt.expectedPackCounts, actualCounts)
-		assert.Equal(t, tt.expectedTotalItems, actualTotalItems)
-		assert.Equal(t, tt.expectedTotalPacks, actualTotalPack)
+		assert.Equal(t, tt.expectedExtraItems, res.ExtraItems)
+		assert.NotNil(t, tt.expectedPackCounts, res.Packs)
+		assert.Equal(t, tt.expectedTotalItems, res.TotalItems)
+		assert.Equal(t, tt.expectedTotalPacks, res.TotalPacks)
 	}
 }
 
@@ -104,6 +104,6 @@ func TestZeroItems(t *testing.T) {
 	packSizes := []int{5000, 2000, 1000, 500, 250}
 	items := 0
 
-	_, _, _, _, err := packer.PackItems(packSizes, items)
+	_, err := packer.PackItems(packSizes, items)
 	assert.Error(t, err)
 }

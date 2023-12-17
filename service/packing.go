@@ -4,6 +4,8 @@ import (
 	"errors"
 	"fmt"
 	"sort"
+
+	"github.com/willpennell/packing-project/model"
 )
 
 type Packer interface {
@@ -13,13 +15,13 @@ type Packer interface {
 
 type PackService struct{}
 
-func (ps PackService) PackItems(packSizes []int, items int) (int, int, int, []int, error) {
+func (ps PackService) PackItems(packSizes []int, items int) (model.PackedItemsInfo, error) {
 
 	if items <= 0 {
-		return 0, 0, 0, nil, errors.New("you need more than 0 items for an order")
+		return model.PackedItemsInfo{}, errors.New("you need more than 0 items for an order")
 	}
 	if len(packSizes) <= 0 {
-		return 0, 0, 0, nil, errors.New("you must have pack sizes to send")
+		return model.PackedItemsInfo{}, errors.New("you must have pack sizes to send")
 	}
 
 	packSizes = ps.RemoveDuplicates(packSizes)
@@ -48,8 +50,22 @@ func (ps PackService) PackItems(packSizes []int, items int) (int, int, int, []in
 	resizeToLargerPacks(packSizes, counters)
 	totalItems, totalPacks := totals(packSizes, counters)
 
-	// return struct
-	return extraItems, totalItems, totalPacks, counters, nil
+	packs := make(map[string]model.PackInfo)
+	for i, size := range packSizes {
+		key := fmt.Sprintf("box_%d", i+1)
+		packs[key] = model.PackInfo{
+			Size: size,
+			Used: counters[i],
+		}
+	}
+
+	response := model.PackedItemsInfo{
+		ExtraItems: extraItems,
+		TotalItems: totalItems,
+		TotalPacks: totalPacks,
+		Packs:      packs,
+	}
+	return response, nil
 }
 
 func resizeToLargerPacks(packSizes []int, counters []int) {
