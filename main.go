@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/gin-gonic/gin"
 
 	"github.com/willpennell/packing-project/router"
@@ -10,15 +8,9 @@ import (
 )
 
 func main() {
-	items := 12001
-
-	packSizes := []int{5000, 2000, 1000, 500, 250}
-
-	packer := service.PackService{}
-
-	fmt.Println(packer.PackItems(packSizes, items))
-
+	dbService := service.NewDBService()
 	r := gin.Default()
-	router.InitializeRoutes(r)
+	router.InitializeRoutes(r, dbService)
 	r.Run()
+
 }

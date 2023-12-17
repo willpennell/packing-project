@@ -8,6 +8,7 @@ import (
 
 type Packer interface {
 	PackItems(packSizes []int, items int) (int, int, int, []int)
+	RemoveDuplicates(packSizes []int) []int
 }
 
 type PackService struct{}
@@ -21,7 +22,7 @@ func (ps PackService) PackItems(packSizes []int, items int) (int, int, int, []in
 		return 0, 0, 0, nil, errors.New("you must have pack sizes to send")
 	}
 
-	packSizes = removeDuplicates(packSizes)
+	packSizes = ps.RemoveDuplicates(packSizes)
 	sortSizesDescending(packSizes)
 
 	counters := make([]int, len(packSizes))
@@ -79,7 +80,7 @@ func sortSizesDescending(packSizes []int) {
 	})
 }
 
-func removeDuplicates(listToRemove []int) []int {
+func (ps PackService) RemoveDuplicates(listToRemove []int) []int {
 	keys := make(map[int]bool)
 	list := []int{}
 	for _, entry := range listToRemove {

@@ -49,3 +49,6 @@ go.sum
 
 tmp/
 config.yaml
+
+
+.air.toml
