@@ -1,0 +1,169 @@
+{
+	"info": {
+		"_postman_id": "01435124-3166-4c99-af03-45bafde84bd1",
+		"name": "Prod",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16306285"
+	},
+	"item": [
+		{
+			"name": "GetPacking",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://packing-project.onrender.com/pack/250",
+					"protocol": "https",
+					"host": [
+						"packing-project",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"pack",
+						"250"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddPackSize",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://packing-project.onrender.com/pack/add?size=15",
+					"protocol": "https",
+					"host": [
+						"packing-project",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"pack",
+						"add"
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": "15"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RemovePackSize",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://packing-project.onrender.com/pack/delete?size=15",
+					"protocol": "https",
+					"host": [
+						"packing-project",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"pack",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": "15"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllPackSizes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://packing-project.onrender.com/pack/list",
+					"protocol": "https",
+					"host": [
+						"packing-project",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"pack",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddNewListOfPacks",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"pack_sizes\": [200, 100, 500]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://packing-project.onrender.com/pack/new",
+					"protocol": "https",
+					"host": [
+						"packing-project",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"pack",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ResetPackSizes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://packing-project.onrender.com/pack/reset",
+					"protocol": "https",
+					"host": [
+						"packing-project",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"pack",
+						"reset"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
