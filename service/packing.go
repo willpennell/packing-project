@@ -9,7 +9,7 @@ import (
 )
 
 type Packer interface {
-	PackItems(packSizes []int, items int) (int, int, int, []int)
+	PackItems(packSizes []int, items int) (model.PackedItemsInfo, error)
 	RemoveDuplicates(packSizes []int) []int
 }
 
@@ -28,7 +28,6 @@ func (ps PackService) PackItems(packSizes []int, items int) (model.PackedItemsIn
 	sortSizesDescending(packSizes)
 
 	counters := make([]int, len(packSizes))
-	fmt.Println(packSizes)
 	minValue := packSizes[len(packSizes)-1]
 
 	for i, pack := range packSizes {

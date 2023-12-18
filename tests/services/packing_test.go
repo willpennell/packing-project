@@ -19,7 +19,6 @@ func TestPackItems(t *testing.T) {
 	expectedExtraItems := 0
 	expectedTotalItems := 15
 	expectedTotalPacks := 2
-	//expectedPacks := model.PackInfo{}
 
 	res, err := packer.PackItems(packSizes, items)
 	if err != nil {

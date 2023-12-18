@@ -29,7 +29,7 @@ func GetPackHandler(dbService *service.DBService) gin.HandlerFunc {
 		response, err := packer.PackItems(packSizes, number)
 
 		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err})
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err})
 		}
 
 		c.JSON(http.StatusOK, response)
