@@ -22,7 +22,6 @@ func TestNewDBService(t *testing.T) {
 	assert.Equal(t, expectedPacks, actualPacks)
 }
 
-// AddPackSize
 func TestAddNewPackSize(t *testing.T) {
 	dbService := service.NewDBService()
 
@@ -41,7 +40,6 @@ func TestAddExistingPackSize(t *testing.T) {
 
 }
 
-// RemovePackSize
 func TestRemoveExistingPackSize(t *testing.T) {
 	dbService := service.NewDBService()
 
@@ -86,4 +84,23 @@ func TestAddNewPackSizeListAllPacks(t *testing.T) {
 	slices.Sort(expectedResult)
 	slices.Sort(actualPackSizes)
 	assert.Equal(t, expectedResult, actualPackSizes)
+}
+
+func TestResetPackSize(t *testing.T) {
+	dbService := service.NewDBService()
+
+	err := dbService.ResetPackSize()
+	assert.Nil(t, err)
+}
+
+func TestNewPackSizes(t *testing.T) {
+	dbService := service.NewDBService()
+	expectedResult := []int{1, 15, 78}
+
+	err := dbService.NewPackSizes([]int{1, 15, 78})
+	assert.Nil(t, err)
+
+	actualList, err := dbService.ListAllPackSizes()
+	assert.Nil(t, err)
+	assert.Equal(t, expectedResult, actualList)
 }
