@@ -5,6 +5,9 @@ This project will accept a number of items and return the optimal packaging, it 
 2. Within the constraints of Rule 1 above, send out no more items than necessary to fulfil the order.
 3.	Within the constraints of Rules 1 & 2 above, send out as few packs as possible to fulfil each order.
 
+The initial pack sizes are 5000, 2000, 1000, 500, 250.
+So when call the `/pack/250` endpoint 1 pack will have been used (the 250 one). However should we send ask for 251, the optimal would be 1 x 500 pack size. To satisfy the above constraints.
+
 https://packing-project.onrender.com/pack/250
 
 # Endpoints:
